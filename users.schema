@@ -1,0 +1,13 @@
+{
+  "Name": "users",
+  "Columns": [
+    {
+      "Name": "id",
+      "Type": "INT"
+    },
+    {
+      "Name": "name",
+      "Type": "TEXT"
+    }
+  ]
+}
