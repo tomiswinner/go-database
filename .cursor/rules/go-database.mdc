@@ -23,3 +23,15 @@ CREATE TABLE users (
 - 必要な機能は`go-rdbms-plan.md`に記載しているため、それを順に実装していくこと
 - step by step でコーディングを進めていくこと
 - 作業内容を、`working-memo.md` に記載していくこと
+
+## 変数命名規則
+
+- \_ （アンダースコア）を使用せず MixedCaps とする : `MixedCaps`
+- 頭字語は Url や Id などとせずに URL、ID とする : URL、ID
+- エラーの変数名、つまり Error インタフェースを満たす Error 型としてふるまう型の名前には接尾語 Error をつける : MarshalerError、UnsupportedTypeError
+- エラーの変数は Err または err から始める : ErrMarshalerError、errUnsupportedTypeError
+- 長い名前よりも短い名前を選ぶ : req, i
+- 宣言している箇所と離れた場所で用いられる変数については、説明的な変数名を付ける : smallBufferSize, largeBufferSize
+- パッケージ名は小文字で始める : `pkg/http/server`
+- 1 つのメソッドのみを持つインタフェースでは、er という接尾辞がついた名前が用いる : erReader, erWriter
+  - 複数のメソッドで構成される場合は、そのインタフェースの目的を適切に説明する
