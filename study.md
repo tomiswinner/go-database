@@ -1,3 +1,26 @@
+## チェックポイントと WAL
+
+- チェックポイント = データまで fsync された場所
+- チェックポイント以降の wal は、データが fsync されていないとみなして良いので、チェックポイント以降の wal を適用していく
+- begin ~ commit までがある wal は適用する、commit がない wal は捨てるという判断をするために commit, begin, rollback などの transaction 周りの操作も wal として記録しておく
+
+- あとは、チェックポイントの位置を記録しておく必要がある
+
+- トランザクションを構成する WAL のイメージは ↓
+
+```txt
+# Tx=1 開始
+WAL #1: BEGIN tx=1
+
+# データ変更
+WAL #2: INSERT A
+WAL #3: UPDATE B
+WAL #4: DELETE C
+
+# Tx=1 完了
+WAL #5: COMMIT tx=1
+```
+
 ## `fsync` と `fdatasync`
 
 - バッファの書き出しは以下 2 種類
